@@ -1,18 +1,15 @@
-import {useState} from 'react';
-const Dice = () => {
-    // const [diceNumber, setDiceNumber] = useState(1) 
-    // console.log('after dice number-> ', diceNumber);
-    return (
-        <div className = 'diceContainer'>
-        {/* // onRoll = {() => setDiceNumber(this.diceNumber + 1)}> */}
-            {/* <img style = {imgStyle} src = {require('../images/dice1.png')}/>  -> does not work ?*/}
-                {/* <img style = {imgStyle} src = {dice1} alt = 'dice1'></img>; 
-                <img style = {imgStyle} src = {dice1} alt = 'dice2'></img>;  */}
-        </div>
-    )
+const Dice = (props) =>  <Image dice = {props.dice}></Image>
+
+const Image = ({dice}) => {
+    const source = '/images/dice-' + dice + '.png';
+    return <img src = {source} style = {imgStyle} alt = {'dice' + dice}></img>
 }
+
 const imgStyle = {
     height: '150px',
-    width: '150px'
+    width: '150px',
+    marginRight:'15px',
+    borderRadius: '20px'
 }
+
 export default Dice
