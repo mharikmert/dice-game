@@ -16,8 +16,6 @@ code {
 }
 
 .btn{
-  height: 80px;
-  width:80px;
   background-color: white;
   color: black;
   font-size: 16px;
@@ -27,11 +25,13 @@ code {
 }
 
 .btn:hover{
+  color: white;
   background-color:black;
 }
 
 #root{
   text-align:center;
+  display: flex;
 }
 .player1-container{
   float: left;
