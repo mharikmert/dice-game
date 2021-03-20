@@ -1,45 +1,39 @@
-import {useState} from 'react'
 import React from 'react'
 import Header from './components/Header';
-import Button from './components/Button';
-import Result from './components/Result'; 
-import Dice from './components/Dice';
 import PlayerPlace from './components/PlayerPlace';
-import Score from './components/Score';
+import Button from './components/Button'
+import Dice from './components/Dice';
 
-const App = () => {
-  // should be returned a single element
-  const [count, setCount] = useState(0);
-  const [score,number, setScore,setNumber] = useState();
+class App extends React.Component{
+  state = {
+    dice1: 1, dice2: 1, buttonClicked: false
+  }
+  render(){
     return  (
       <div className = 'container'>
-          <Header/> 
-        <div className = 'btnContainer'>
-          <Button text = '&minus;' onClick = {() => setCount(count-1)}/>
-          <Result result = {count}/> 
-          <Button text = '&#43;' onClick = {() => setCount(count+1)}/> 
-        </div>
-          {/* <Dice/> */}
-          <div className = "player1-container" > 
-            <PlayerPlace number = {1} color = "green" score = {count} />
-          </div>
-          <div className = "player2-container"> 
-            <PlayerPlace number = {2} color = "green" score = {count} />
-          </div>
+            <Header/> 
+          
+            <Dice dice = {this.state.dice1}></Dice>
+            <Dice dice = {this.state.dice2}></Dice>
+
+            <div style = {buttonContainer}>
+                <Button text = 'Throw dices' buttonClicked = {this.state.buttonClicked} onClick = {() => this.setState({dice1: generateRandomValue(), dice2: generateRandomValue(), buttonClicked: true})}></Button>
+            </div>
+            <div className = "player1-container" > 
+                <PlayerPlace number = {1} color = "green" score = {this.state.dice1} />
+            </div>
+            <div className = "player2-container"> 
+                <PlayerPlace number = {2} color = "green" score = {this.state.dice2} />
+            </div>
+
       </div>
-      // <h2> that does not work </h2>
     )
+
+  }
 }
+const generateRandomValue = () => parseInt(((Math.random() * 6) + 1));
 
-// class App extends React.Component{
-//   render(){
-//     return (
-//     <div className = 'container'>
-//         <h1> welcome to the pig game </h1>
-//         <Header/>
-
-//     </div>
-//     )
-// }
-// }
+const buttonContainer = {
+    marginTop : '20px'
+}
 export default App;
