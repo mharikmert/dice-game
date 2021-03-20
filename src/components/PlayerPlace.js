@@ -12,7 +12,7 @@ const playerContainer = {
     color: 'white',
     textAlign: 'center',
     fontSize: '30px',
-    width: '200px', height: '500px',
+    width: '300px', height: '350px',
     backgroundImage: 'linear-gradient(to top left, blue 0%, black 100%)',
     borderRadius: '10px'
 }
