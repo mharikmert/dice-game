@@ -33,14 +33,3 @@ code {
   text-align:center;
   display: flex;
 }
-.player1-container{
-  float: left;
-}
-.player2-container{
-  float:right;
-}
-
-.btnContainer{
-  justify-content: center;
-  display: flex;
-}
