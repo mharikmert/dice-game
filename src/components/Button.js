@@ -1,7 +1,7 @@
 const Button = ({text, onClick, buttonClicked}) => {
     return <button className = 'btn' onClick = {onClick}> 
-      {buttonClicked && <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
-    {text} </button> 
+            {buttonClicked && <span className = "spinner-border spinner-border-sm"></span>}
+            {text} 
+           </button> 
 }
-
 export default Button
