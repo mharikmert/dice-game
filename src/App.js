@@ -9,6 +9,17 @@ class App extends React.Component{
     dice1: 1, dice2: 1, buttonClicked: false
   }
   render(){
+    const onClickHandler = () => {
+      if(!this.state.buttonClicked){
+        this.setState({buttonClicked: true})
+        setTimeout( () => {
+          this.setState({
+            buttonClicked: false,
+            dice1: generateRandomValue(),
+            dice2: generateRandomValue()})
+        },1000)
+      }
+    }
     return  (
       <div className = 'container'>
             <Header/> 
@@ -17,21 +28,21 @@ class App extends React.Component{
             <Dice dice = {this.state.dice2}></Dice>
 
             <div style = {buttonContainer}>
-                <Button text = 'Throw dices' buttonClicked = {this.state.buttonClicked} onClick = {() => this.setState({dice1: generateRandomValue(), dice2: generateRandomValue(), buttonClicked: true})}></Button>
+                <Button text = {'Throw Dices'} buttonClicked = {this.state.buttonClicked} onClick = {() => onClickHandler()}></Button>
             </div>
-            <div className = "player1-container" > 
+            <div className = "player1-container" style = {{float: 'left'}}> 
                 <PlayerPlace number = {1} color = "green" score = {this.state.dice1} />
             </div>
-            <div className = "player2-container"> 
+            <div className = "player2-container" style = {{float: 'right'}}> 
                 <PlayerPlace number = {2} color = "green" score = {this.state.dice2} />
             </div>
-
       </div>
     )
 
   }
 }
 const generateRandomValue = () => parseInt(((Math.random() * 6) + 1));
+
 
 const buttonContainer = {
     marginTop : '20px'
