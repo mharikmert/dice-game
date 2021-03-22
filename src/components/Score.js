@@ -8,7 +8,8 @@ const Score = ({score}) => {
 
 const scoreContainer = {
     textAlign: 'center',
-    fontSize: '30px'
+    fontSize: '30px',
+    marginBottom: '120px'
 }
 
 export default Score
