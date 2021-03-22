@@ -1,7 +1,7 @@
 # Dice Game (In Development) 
 
 ## About 
-This is a simple dice developing in React JS. Game plays with 2 players. There is two dices, one player roll dices, get scores with the numbers of the dices. Player might want to roll dice again or hold the current score. If player wants to hold score, score is held, other player's turn comes. If wants to roll again, roll again. However if two dices are both one or six etc rules may change, the score of the player becomes zero and other player's turn comes. Player that reachs 100, won the game.  
+This is a simple dice developing in React JS. Game plays with 2 players. There is two dices, one player roll dices, get scores with the numbers of the dices. Player might want to roll dice again or hold the current score. If player wants to hold score, score is held, other player's turn comes. If wants to roll again, roll again. However if two dices are both one or six etc rules may change, the score of the player becomes zero and other player's turn comes. Player that reachs 100, wins the game.  
 
 ## Installation 
 ``` 
@@ -46,3 +46,7 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Requirements
+This script requires:
+ - Node 14.16.0+
