@@ -1,22 +1,31 @@
 import React from 'react'
 import Header from './components/Header';
-import PlayerPlace from './components/PlayerPlace';
+import Player from './components/Player';
 import Button from './components/Button'
 import Dice from './components/Dice';
 
 class App extends React.Component{
   state = {
-    dice1: 1, dice2: 1, buttonClicked: false
+    dice1: 1,
+    dice2: 1, 
+    buttonClicked: false,
+    activePlayer: 1,
+    score: 0,
   }
+
   render(){
-    const onClickHandler = () => {
+    const {dice1, dice2, score, activePlayer, buttonClicked} = this.state;
+    const onClickHandler = activePlayer => {
       if(!this.state.buttonClicked){
         this.setState({buttonClicked: true})
-        setTimeout( () => {
+        setTimeout( () => { 
           this.setState({
             buttonClicked: false,
             dice1: generateRandomValue(),
-            dice2: generateRandomValue()})
+            dice2: generateRandomValue(),
+            activePlayer: activePlayer === 1 ? 2 : 1,
+          });
+          this.setState({score: this.state.score + this.state.dice1 + this.state.dice2})
         },1000)
       }
     }
@@ -24,17 +33,17 @@ class App extends React.Component{
       <div className = 'container'>
             <Header/> 
           
-            <Dice dice = {this.state.dice1}></Dice>
-            <Dice dice = {this.state.dice2}></Dice>
+            <Dice dice = {dice1}></Dice>
+            <Dice dice = {dice2}></Dice>
 
-            <div style = {buttonContainer}>
-                <Button text = {'Throw Dices'} buttonClicked = {this.state.buttonClicked} onClick = {() => onClickHandler()}></Button>
+            <div style = {{marginTop: '20px'}}>
+                <Button text = {'Throw Dices'} buttonClicked = {buttonClicked} onClick = {() => onClickHandler(activePlayer)}></Button>
             </div>
             <div className = "player1-container" style = {{float: 'left'}}> 
-                <PlayerPlace number = {1} color = "green" score = {this.state.dice1} />
+                <Player number = {1} score = {score} isActive = {activePlayer === 1}/>
             </div>
             <div className = "player2-container" style = {{float: 'right'}}> 
-                <PlayerPlace number = {2} color = "green" score = {this.state.dice2} />
+                <Player number = {2} score = {score} isActive = {activePlayer === 2}/>
             </div>
       </div>
     )
@@ -43,8 +52,4 @@ class App extends React.Component{
 }
 const generateRandomValue = () => parseInt(((Math.random() * 6) + 1));
 
-
-const buttonContainer = {
-    marginTop : '20px'
-}
 export default App;
