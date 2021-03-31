@@ -10,25 +10,50 @@ class App extends React.Component{
     dice2: 1, 
     buttonClicked: false,
     activePlayer: 1,
-    score: 0,
+    playerOne: 0,
+    playerTwo: 0
+  }
+  init = () => {
+    this.setState({
+      dice1: 1,
+      dice2: 1, 
+      buttonClicked: false,
+      activePlayer: 1,
+      playerOne: 0,
+      playerTwo: 0
+    })
   }
 
   render(){
-    const {dice1, dice2, score, activePlayer, buttonClicked} = this.state;
-    const onClickHandler = activePlayer => {
+    const {dice1, dice2, playerOne, playerTwo, activePlayer, buttonClicked} = this.state;
+    const rollHandler = activePlayer => {
       if(!this.state.buttonClicked){
         this.setState({buttonClicked: true})
         setTimeout( () => { 
           this.setState({
             buttonClicked: false,
             dice1: generateRandomValue(),
-            dice2: generateRandomValue(),
-            activePlayer: activePlayer === 1 ? 2 : 1,
-          });
-          this.setState({score: this.state.score + this.state.dice1 + this.state.dice2})
+            dice2: generateRandomValue()
+          })
+          const additionalScore = this.state.dice1 + this.state.dice2; 
+          activePlayer === 1 ? this.setState({playerOne: this.state.playerOne + additionalScore}): this.setState({playerTwo: this.state.playerTwo + additionalScore});
         },1000)
       }
+      if(finishState(activePlayer)){
+        this.init();
+          activePlayer === 1 ? alert('Player 1 won!') : alert('Player 2 won');
+      }
+      return true;
     }
+
+    const holdHandler = activePlayer => {
+      if(activePlayer === 1) this.setState({activePlayer: 2})
+      else this.setState({activePlayer: 1});
+      return true;
+    }
+
+    const finishState = activePlayer => activePlayer === 1 ? playerOne >= 100 : playerTwo >= 100
+    
     return  (
       <div className = 'container'>
             <Header/> 
@@ -37,13 +62,13 @@ class App extends React.Component{
             <Dice dice = {dice2}></Dice>
 
             <div style = {{marginTop: '20px'}}>
-                <Button text = {'Throw Dices'} buttonClicked = {buttonClicked} onClick = {() => onClickHandler(activePlayer)}></Button>
+                <Button text = {'New Game'} onClick = {() => this.init()}></Button>
             </div>
             <div className = "player1-container" style = {{float: 'left'}}> 
-                <Player number = {1} score = {score} isActive = {activePlayer === 1}/>
+                <Player number = {1} score = {playerOne} buttonClicked= {buttonClicked} isActive = {activePlayer === 1} roll = {() => rollHandler(1)} hold = {() => holdHandler(1)}/>
             </div>
             <div className = "player2-container" style = {{float: 'right'}}> 
-                <Player number = {2} score = {score} isActive = {activePlayer === 2}/>
+                <Player number = {2} score = {playerTwo} buttonClicked = {buttonClicked} isActive = {activePlayer === 2} roll = {() => rollHandler(2)} hold = {() => holdHandler(2)}/>
             </div>
       </div>
     )
